@@ -11,14 +11,13 @@ import android.app.Activity;
 import android.util.Log;
 
 import com.timesoft.kaitoo.activity.CustomizedListViewActivity;
+import com.timesoft.kaitoo.common.ResponseCommon;
 import com.timesoft.kaitoo.common.thead.AbstractProgressableAsyncTask;
 import com.timesoft.kaitoo.xml.XMLParser;
 
-public class CustomizedListViewTask extends AbstractProgressableAsyncTask<String, ArrayList<HashMap<String, String>>> {
+public class CustomizedListViewTask extends AbstractProgressableAsyncTask<String, ResponseCommon> {
 
 	private Activity activity;
-	
-	private ArrayList<HashMap<String, String>> songsList = new ArrayList<HashMap<String, String>>();
 	
 	public CustomizedListViewTask(Activity activity) {
 		this.activity = activity;
@@ -29,9 +28,11 @@ public class CustomizedListViewTask extends AbstractProgressableAsyncTask<String
     }
 	
 	@Override
-	protected ArrayList<HashMap<String, String>> performTaskInBackground(
+	protected ResponseCommon performTaskInBackground(
 			String parameter) throws Exception {
 		// TODO Auto-generated method stub
+
+		ArrayList<HashMap<String, String>> songsList = new ArrayList<HashMap<String, String>>();
 		
 		XMLParser parser = new XMLParser(activity);
         String xml = parser.getXmlFromUrl(parameter); // getting XML from URL
@@ -56,7 +57,9 @@ public class CustomizedListViewTask extends AbstractProgressableAsyncTask<String
             songsList.add(map);
         }
         
-		return songsList;
+        ResponseCommon result = new ResponseCommon(Boolean.TRUE);
+        result.setResult(songsList);
+		return result;
 	}
 
 }

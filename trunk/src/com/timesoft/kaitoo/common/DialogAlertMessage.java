@@ -1,22 +1,22 @@
 package com.timesoft.kaitoo.common;
 
+import android.app.Activity;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 
 public class DialogAlertMessage {
 	
 	private Dialog dialog;
-	private Context context;
+	private Activity activity;
 	
-	public DialogAlertMessage(Context context) {
-		dialog = new Dialog(context);
-		this.context = context;
+	public DialogAlertMessage(Activity activity) {
+		dialog = new Dialog(activity);
+		this.activity = activity;
 	}
 	
 	public void showAlertMessage(String title, String message, int drawable) {
-		Builder builder = new Builder(context);
+		Builder builder = new Builder(activity);
         builder.setTitle(title);
         builder.setMessage(message);
         builder.setIcon(drawable);
@@ -31,7 +31,7 @@ public class DialogAlertMessage {
 			int drawable,
 			DialogInterface.OnClickListener confirmEvent,
 			DialogInterface.OnClickListener exitEvent) {
-		Builder builder = new Builder(context);
+		Builder builder = new Builder(activity);
         builder.setTitle(title);
         builder.setMessage(message);
         builder.setIcon(drawable);

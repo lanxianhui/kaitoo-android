@@ -9,25 +9,22 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
-import android.content.Context;
 import android.util.Log;
 
-import com.timesoft.kaitoo.common.DialogAlertMessage;
+import com.timesoft.kaitoo.common.ResponseCommon;
 import com.timesoft.kaitoo.common.thead.AbstractProgressableAsyncTask;
 import com.timesoft.kaitoo.wsclient.mainws.bo.UserBO;
 
-public class UserCoreAuthentificationTask extends AbstractProgressableAsyncTask<SoapObject, UserBO> {
+public class UserCoreAuthentificationTask extends AbstractProgressableAsyncTask<SoapObject, ResponseCommon> {
 	
 	private static final String TAG = "UserCoreAuthentificationTask";
 	
 	private static final String WSDL_URL = "http://192.168.0.21:8080/web-service/ws-services/MainWebService?wsdl";
     private static final String WS_NAMESPACE = "http://ws.kaitoo.timesoft.com/";
     private static final String WS_METHOD_NAME = "userCoreAuthentification";
-
-    private Context context;
     
-	public UserCoreAuthentificationTask(Context context) {
-		this.context = context;
+	public UserCoreAuthentificationTask() {
+
     }
 
 	public static SoapObject createRequest(String channel,
@@ -44,8 +41,9 @@ public class UserCoreAuthentificationTask extends AbstractProgressableAsyncTask<
     }
 
     @Override
-    protected UserBO performTaskInBackground(SoapObject parameter) throws Exception {
+    protected ResponseCommon performTaskInBackground(SoapObject parameter) throws Exception {
         // 1. Create SOAP Envelope using the request
+    	ResponseCommon result = null;
     	try {
 	        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 	        
@@ -56,7 +54,7 @@ public class UserCoreAuthentificationTask extends AbstractProgressableAsyncTask<
 	        envelope.setOutputSoapObject(parameter);
 	
 	        // 2. Create a HTTP Transport object to send the web service request
-	        HttpTransportSE httpTransport = new HttpTransportSE(WSDL_URL, 3000);
+	        HttpTransportSE httpTransport = new HttpTransportSE(WSDL_URL, 15000);
 	        httpTransport.debug = true; // allows capture of raw request/respose in Logcat
 	
 	        // 3. Make the web service invocation
@@ -65,7 +63,6 @@ public class UserCoreAuthentificationTask extends AbstractProgressableAsyncTask<
 	        Log.d(TAG, "HTTP REQUEST:\n" + httpTransport.requestDump);
 	        Log.d(TAG, "HTTP RESPONSE:\n" + httpTransport.responseDump);
 	
-	        UserBO result = null;
 	        if (envelope.bodyIn instanceof SoapObject) { // SoapObject = SUCCESS
 	            SoapObject soapObject = (SoapObject) envelope.bodyIn;
 	            result = parseSOAPResponse(soapObject);
@@ -73,15 +70,22 @@ public class UserCoreAuthentificationTask extends AbstractProgressableAsyncTask<
 	            SoapFault soapFault = (SoapFault) envelope.bodyIn;
 	            throw new Exception(soapFault.getMessage());
 	        }
+	        
 	        return result;
     	} catch(SocketTimeoutException e) {
             //When timeout occurs handles this....
-    		return null;
+    		result = new ResponseCommon(Boolean.FALSE);
+    		result.setExceptoin(e);
+    		return result;
+        } catch(Exception e) {
+        	throw e;
         }
         
     }
 
-    private UserBO parseSOAPResponse(SoapObject response) {
+    private ResponseCommon parseSOAPResponse(SoapObject response) {
+    	
+    	ResponseCommon common = null;
     	
     	UserBO userForecastResult = null;
     	
@@ -93,21 +97,22 @@ public class UserCoreAuthentificationTask extends AbstractProgressableAsyncTask<
 	        if (userForecastNode != null) {
 	            // see <s:complexType name="ForecastReturn"> element for definition of "ForecastReturn"
 	                    
-	            Long id =  Long.parseLong(userForecastNode.getPrimitivePropertySafelyAsString("id").trim());
-	            String email =  userForecastNode.getPrimitivePropertySafelyAsString("email").trim();
-	            String password =  userForecastNode.getPrimitivePropertySafelyAsString("password").trim();
+	            Long id =  Long.parseLong(userForecastNode.getPrimitivePropertySafelyAsString("id"));
+	            String email =  userForecastNode.getPrimitivePropertySafelyAsString("email");
+	            String password =  userForecastNode.getPrimitivePropertySafelyAsString("password");
 	            userForecastResult = new UserBO(id, email, password);
 	            
 	
 	            Log.i(TAG, " --> id: "+id+", email: "+email+", password: "+password+".");
 	            
-	            return userForecastResult;
+	            common = new ResponseCommon(Boolean.TRUE);
+	            common.setResult(userForecastResult);
+	            return common;
 	        }
     	}
     	
-    	DialogAlertMessage dialog = new DialogAlertMessage(context);
-    	dialog.showAlertMessage("Authentification", "Email or Password is invalid.", android.R.drawable.ic_dialog_alert);
-    	return null;
-        
+    	common = new ResponseCommon(Boolean.FALSE);
+    	common.setExceptoin(new NullSoapObject());
+    	return common;
     }
 }
