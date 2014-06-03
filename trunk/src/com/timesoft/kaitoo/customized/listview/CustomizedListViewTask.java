@@ -10,7 +10,7 @@ import org.w3c.dom.NodeList;
 import android.app.Activity;
 import android.util.Log;
 
-import com.timesoft.kaitoo.activity.CustomizedListViewActivity;
+import com.timesoft.kaitoo.activity.listchannel.CustomizedListViewActivity;
 import com.timesoft.kaitoo.common.ResponseCommon;
 import com.timesoft.kaitoo.common.thead.AbstractProgressableAsyncTask;
 import com.timesoft.kaitoo.xml.XMLParser;

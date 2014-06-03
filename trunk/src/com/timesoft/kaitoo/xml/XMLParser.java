@@ -33,7 +33,7 @@ import org.xml.sax.SAXException;
 
 
 
-import com.timesoft.kaitoo.common.ToastMessageUtill;
+import com.timesoft.kaitoo.common.ToastMessageUtil;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -70,7 +70,7 @@ public class XMLParser {
         try {
         	
         	if(!isConnected(context)){
-        		ToastMessageUtill.showToastMessage(context, "Error Connection");
+        		ToastMessageUtil.showToastMessage(context, "Error Connection");
                 return null;
             }
             // defaultHttpClient

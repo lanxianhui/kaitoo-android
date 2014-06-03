@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.timesoft.kaitoo.R;
-import com.timesoft.kaitoo.activity.CustomizedListViewActivity;
+import com.timesoft.kaitoo.activity.listchannel.CustomizedListViewActivity;
 import com.timesoft.kaitoo.customized.listview.ImageLoader;
 
 import android.app.Activity;
