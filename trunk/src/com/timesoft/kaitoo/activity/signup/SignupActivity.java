@@ -165,7 +165,7 @@ public class SignupActivity extends MainAppActivity {
 										android.R.drawable.ic_dialog_alert);
 							} else {
 								dialog.showAlertMessage("Service error",
-										"Service is down. Press Yes for pass.",
+										"Service is down.",
 										android.R.drawable.ic_dialog_alert);
 							}
 						}
