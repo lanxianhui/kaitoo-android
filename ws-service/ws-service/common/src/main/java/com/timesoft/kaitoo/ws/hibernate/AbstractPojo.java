@@ -5,7 +5,6 @@
  */
 package com.timesoft.kaitoo.ws.hibernate;
 
-import com.timesoft.kaitoo.ws.common.*;
 import java.beans.PropertyDescriptor;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
