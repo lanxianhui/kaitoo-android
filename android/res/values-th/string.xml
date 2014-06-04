@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  Thailand  -->
+    
+    <string name="app_name">ไก่ตู้</string>
+    <string name="action_settings">ตั้งค่า</string>
+
+    <!--  signin_main  -->
+    <string name="signin_title">เข้าสู่ระบบ</string>
+    <string name="signin_email">อีเมล์</string>
+    <string name="signin_password">รหัสผ่าน</string>
+    <string name="signup_validate_empty">กรุณากรอกอีเมล์และรหัสผ่าน</string>
+    <string name="signin_signin">เข้าสู่ระบบ</string>
+    <string name="signin_signup">สมัครสมาชิก</string>
+    
+    <!--  signup_main  -->
+    <string name="signup_title">ลงทะเบียน</string>
+    <string name="signup_repassword">กรอกรหัสผ่านอีกครั้ง</string>
+    <string name="signup_validate_title">ตรวจสอบ</string>
+    <string name="signup_validate_email">รูปแบบอีเมล์ไม่ถูกต้อง</string>
+    <string name="signup_validate_email_empty">กรุณากรอกอีเมล์</string>
+    <string name="signup_validate_email_duplicate">อีเมล์นี้ถูกใช้งานแล้ว</string>
+    <string name="signup_validate_password_empty">กรุณากรอกรหัสผ่านให้ครบทั้งสองช่อง</string>
+    <string name="signup_validate_password_easy">รูปแบบรหัสผ่านไม่ถูกต้อง ต้องมีตัวอักษรผสมตัวเลขและไม่ต่ำกว่า 6 ตัวอักษร</string>
+    <string name="signup_validate_password_compare">รหัสผ่านทั้งสองช่องไม่ตรงกัน</string>
+    
+    <!--  signup_policy  -->
+    <string name="signup_policy_title">เงื่อนไขและข้อกำหนด</string>
+    <string name="signup_policy_agree">ยอมรับเงื่อนไข</string>
+
+	<string name="waiting">กรุณารอสักครู่&#8230;</string>
+	
+	<string name="UserCoreAuthentificationTask_failed_to_invoke_ws">An error occured while attempting to invoke the userCoreAuthentification web service.</string>
+	<string name="CustomizedListViewTask_failed">An error occured while attempting to xml paser.</string>
+    
+</resources>
