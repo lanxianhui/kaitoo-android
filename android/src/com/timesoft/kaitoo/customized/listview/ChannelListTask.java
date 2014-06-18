@@ -10,16 +10,16 @@ import org.w3c.dom.NodeList;
 import android.app.Activity;
 import android.util.Log;
 
-import com.timesoft.kaitoo.activity.listchannel.CustomizedListViewActivity;
+import com.timesoft.kaitoo.activity.listchannel.ChannelListActivity;
 import com.timesoft.kaitoo.common.ResponseCommon;
 import com.timesoft.kaitoo.common.thead.AbstractProgressableAsyncTask;
 import com.timesoft.kaitoo.xml.XMLParser;
 
-public class CustomizedListViewTask extends AbstractProgressableAsyncTask<String, ResponseCommon> {
+public class ChannelListTask extends AbstractProgressableAsyncTask<String, ResponseCommon> {
 
 	private Activity activity;
 	
-	public CustomizedListViewTask(Activity activity) {
+	public ChannelListTask(Activity activity) {
 		this.activity = activity;
 	}
 	
@@ -38,7 +38,7 @@ public class CustomizedListViewTask extends AbstractProgressableAsyncTask<String
         String xml = parser.getXmlFromUrl(parameter); // getting XML from URL
         Document doc = parser.getDomElement(xml); // getting DOM element
         
-        NodeList nl = doc.getElementsByTagName(CustomizedListViewActivity.KEY_SONG);
+        NodeList nl = doc.getElementsByTagName(ChannelListActivity.KEY_SONG);
         
         Log.d("TEST", nl.toString());
         // looping through all song nodes <song>
@@ -47,11 +47,11 @@ public class CustomizedListViewTask extends AbstractProgressableAsyncTask<String
             HashMap<String, String> map = new HashMap<String, String>();
             Element e = (Element) nl.item(i);
             // adding each child node to HashMap key => value
-            map.put(CustomizedListViewActivity.KEY_ID, parser.getValue(e, CustomizedListViewActivity.KEY_ID));
-            map.put(CustomizedListViewActivity.KEY_TITLE, parser.getValue(e, CustomizedListViewActivity.KEY_TITLE));
-            map.put(CustomizedListViewActivity.KEY_ARTIST, parser.getValue(e, CustomizedListViewActivity.KEY_ARTIST));
-            map.put(CustomizedListViewActivity.KEY_DURATION, parser.getValue(e, CustomizedListViewActivity.KEY_DURATION));
-            map.put(CustomizedListViewActivity.KEY_THUMB_URL, parser.getValue(e, CustomizedListViewActivity.KEY_THUMB_URL));
+            map.put(ChannelListActivity.KEY_ID, parser.getValue(e, ChannelListActivity.KEY_ID));
+            map.put(ChannelListActivity.KEY_TITLE, parser.getValue(e, ChannelListActivity.KEY_TITLE));
+            map.put(ChannelListActivity.KEY_ARTIST, parser.getValue(e, ChannelListActivity.KEY_ARTIST));
+            map.put(ChannelListActivity.KEY_DURATION, parser.getValue(e, ChannelListActivity.KEY_DURATION));
+            map.put(ChannelListActivity.KEY_THUMB_URL, parser.getValue(e, ChannelListActivity.KEY_THUMB_URL));
  
             // adding HashList to ArrayList
             songsList.add(map);

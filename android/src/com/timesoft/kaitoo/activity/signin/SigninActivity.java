@@ -5,7 +5,7 @@ import java.net.SocketTimeoutException;
 import org.ksoap2.serialization.NullSoapObject;
 
 import com.timesoft.kaitoo.R;
-import com.timesoft.kaitoo.activity.listchannel.CustomizedListViewActivity;
+import com.timesoft.kaitoo.activity.listchannel.ChannelGroupListActivity;
 import com.timesoft.kaitoo.common.ActivityUtil;
 import com.timesoft.kaitoo.common.DialogAlertMessage;
 import com.timesoft.kaitoo.common.MainAppActivity;
@@ -144,7 +144,7 @@ public class SigninActivity extends MainAppActivity {
 						public void onTaskCompleteSuccess(ResponseCommon result) {
 							if (result.getFlag() && result.getResult() != null) {
 								ActivityUtil.startActivity(activity,
-										CustomizedListViewActivity.class);
+										ChannelGroupListActivity.class);
 							} else {
 								if (result.getExceptoin() instanceof NullSoapObject) {
 									dialog.showAlertMessage("Authentification",
@@ -181,7 +181,7 @@ public class SigninActivity extends MainAppActivity {
 		public void onClick(DialogInterface dialog, int which) {
 			// TODO Auto-generated method stub
 			ActivityUtil.startActivity(activity,
-					CustomizedListViewActivity.class);
+					ChannelGroupListActivity.class);
 		}
 	}
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.timesoft.kaitoo.R;
-import com.timesoft.kaitoo.activity.listchannel.CustomizedListViewActivity;
+import com.timesoft.kaitoo.activity.listchannel.ChannelListActivity;
 import com.timesoft.kaitoo.customized.listview.ImageLoader;
 
 import android.app.Activity;
@@ -16,14 +16,14 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
  
-public class LazyAdapter extends BaseAdapter {
+public class ChannelListAdapter extends BaseAdapter {
  
     private Activity activity;
     private ArrayList<HashMap<String, String>> data;
     private static LayoutInflater inflater=null;
     public ImageLoader imageLoader; 
  
-    public LazyAdapter(Activity a, ArrayList<HashMap<String, String>> d) {
+    public ChannelListAdapter(Activity a, ArrayList<HashMap<String, String>> d) {
         activity = a;
         data=d;
         inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -49,17 +49,17 @@ public class LazyAdapter extends BaseAdapter {
  
         TextView title = (TextView)vi.findViewById(R.id.title); // title
         TextView artist = (TextView)vi.findViewById(R.id.artist); // artist name
-        TextView duration = (TextView)vi.findViewById(R.id.duration); // duration
+//        TextView duration = (TextView)vi.findViewById(R.id.duration); // duration
         ImageView thumb_image=(ImageView)vi.findViewById(R.id.list_image); // thumb image
  
         HashMap<String, String> song = new HashMap<String, String>();
         song = data.get(position);
  
         // Setting all values in listview
-        title.setText(song.get(CustomizedListViewActivity.KEY_TITLE));
-        artist.setText(song.get(CustomizedListViewActivity.KEY_ARTIST));
-        duration.setText(song.get(CustomizedListViewActivity.KEY_DURATION));
-        imageLoader.DisplayImage(song.get(CustomizedListViewActivity.KEY_THUMB_URL), thumb_image);
+        title.setText(song.get(ChannelListActivity.KEY_TITLE));
+        artist.setText(song.get(ChannelListActivity.KEY_ARTIST));
+//        duration.setText(song.get(CustomizedListViewActivity.KEY_DURATION));
+        imageLoader.DisplayImage(song.get(ChannelListActivity.KEY_THUMB_URL), thumb_image);
         return vi;
     }
 }
